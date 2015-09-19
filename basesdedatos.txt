@@ -1,0 +1,12 @@
+localhost
+postgres
+usach
+basededatos1
+localhost
+postgres
+usach
+basededatos2
+localhost
+postgres
+usach
+basededatos3
