@@ -1,1 +1,3 @@
 SELECT nombre FROM alumnos
+SELECT edad FROM alumnos
+SELECT rut FROM alumnos

@@ -51,11 +51,21 @@ for (i = 0; i < file.length+1; i += 1) {
 		}
         }
 }
-var consulta = '';
+var consulta = [];
+parametro = '';
+contcons=0;
 var fileconsulta = fs.readFileSync('consulta.txt', 'utf8');
-for (i = 0; i < fileconsulta.length; i += 1) {
-        consulta=consulta+fileconsulta[i];
+for (i = 0; i < fileconsulta.length+1; i += 1) {
+        if(fileconsulta[i]!='\n' && i!=fileconsulta.length){
+        	parametro=parametro+fileconsulta[i];
+        }
+        else if(fileconsulta[i]=='\n' || i==fileconsulta.length){
+		consulta[contcons]=parametro
+		parametro='';
+		contcons++;
+        }
 }
+console.log(consulta);
 var clientes = [];
 var pg = require('pg');
 var dbparams = [];
@@ -67,6 +77,7 @@ dbparams[i] = {
     database : database[i]
 	};
 }
+for (j = 0; j < contcons; j += 1) {
 for (i = 0; i < servidor; i += 1) {
 	clientes[i]=new pg.Client(dbparams[i]);
 	clientes[i].connect(function(err) {
@@ -74,12 +85,13 @@ for (i = 0; i < servidor; i += 1) {
     			return console.error('could not connect to postgres', err);
   		}
 	});
-     clientes[i].query(consulta, function(err, result) {
+     clientes[i].query(consulta[j], function(err, result) {
     if(err) {
       return console.error('error running query', err);
     }
     console.log(result.rows);
   });
+}
 }
 var sha1 = require('sha1');
 var nombre = '';
