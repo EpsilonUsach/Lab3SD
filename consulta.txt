@@ -1,3 +1,2 @@
-SELECT nombre FROM alumnos
+SELECT nombre FROM alumnos WHERE nombre='Javier'
 SELECT edad FROM alumnos
-SELECT rut FROM alumnos

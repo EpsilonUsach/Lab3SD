@@ -1,4 +1,4 @@
-var express = require('express')
+﻿var express = require('express')
   , app = express()
   , http = require('http')
   , server = http.createServer(app);
@@ -20,6 +20,7 @@ var servidor=0;
 var host = [];
 var user = [];
 var pass = [];
+var port = [];
 var database = [];
 var parametro='';
 var resinsert='';
@@ -43,9 +44,12 @@ for (i = 0; i < file.length+1; i += 1) {
 		else if(contador==3){
                 database[servidor]=parametro;
 		}
+		else if(contador==4){
+                port[servidor]=parametro;
+		}
 		parametro='';
 		contador++;
-		if(contador==4){
+		if(contador==5){
 			contador=0;
 			servidor++;
 		}
@@ -65,7 +69,6 @@ for (i = 0; i < fileconsulta.length+1; i += 1) {
 		contcons++;
         }
 }
-console.log(consulta);
 var clientes = [];
 var pg = require('pg');
 var dbparams = [];
@@ -74,9 +77,11 @@ dbparams[i] = {
     host : host[i],
     user : user[i],
     password : pass[i],
-    database : database[i]
+    database : database[i],
+    port : port[i]
 	};
 }
+console.log(dbparams);
 for (j = 0; j < contcons; j += 1) {
 for (i = 0; i < servidor; i += 1) {
 	clientes[i]=new pg.Client(dbparams[i]);
@@ -124,7 +129,7 @@ for (i = 0; i < insertar.length; i += 1) {
 		if(contador==4){
 			contador=0;
 			strinsertar=nombre+rut+nivel+edad;
-			var hash = sha1(strinsertar);
+			var hash = sha1(rut);
 			dec = parseInt(hash, 16);
 mod=dec%servidor;
 var client = new pg.Client(dbparams[mod]);

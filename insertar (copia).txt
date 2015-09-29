@@ -1,0 +1,13 @@
+vasco 1932 7 20
+alberto 1712 7 25
+francisco 1932 7 20
+pedro 1832 5 30
+juan 8474 3 12
+javier 3124 3 45
+pedro 3214 3 53
+francisca 4334 43 3
+javiera 4324 31 5
+federico 4356 12 5
+luciano 5456 32 12
+ruperto 4325 12 67
+
